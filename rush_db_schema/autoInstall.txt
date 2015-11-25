@@ -1,0 +1,25 @@
+#首先开启自己的mysql服务
+
+#配置你的mysql交互程序所在路径
+mysqlpath=/usr/bin/mysql
+
+#下面配置每个host
+########################################
+#
+#
+########################################
+
+//配置XX
+master_host=192.168.31.122
+master_user=cloud
+master_password=123
+master_port= 3306
+sockPath=/run/mysqld/mysqld.sock
+DB_name=rush
+fullSchemaSqlFilePath=./ciInstall/rush.sql
+upgradeSchemaSqlFilePath=
+app_user=
+app_password=
+allowHosts=%.%.%.%
+
+
