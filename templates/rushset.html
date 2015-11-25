@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>秒杀设置</title></head><body style="background:#F5F5F5;">
+  <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+	{% if err %}
+	window.alert("{{ err }}");
+	{% endif %}
+	
+    });
+    </script>
+ 
+<script language="JavaScript">
+    function checkinput(msg) 
+    { 
+        if (confirm(msg)) 
+            return true; 
+        else 
+            return false;
+    }
+    
+    function check_quick_input() 
+    { 
+        var start = document.getElementById("rush_start_time");
+	var count = document.getElementById("rush_count");
+        if ((start.value && !isNaN(start.value)) && (count.value && !isNaN(count.value)) && (Number(start.value) > 10) && (Number(count.value) > 0))
+	{
+	    return confirm("添加一轮" + start.value + "秒后开始中奖人数为" + count.value + "的秒杀？");
+	}
+        else 
+	{
+	    alert("时间或中奖人数设置不正确,时间必须大于10,中奖人数必须大于0");
+            return false;
+	}
+    }
+</script>
+
+<br><br>
+{% if add_err %} 
+<font color="red">{{ add_err_msg }}</font> <br>
+{% endif %}
+<form method="post" action="." name="add">{% csrf_token %}
+  <table style="text-align: left; width: 100%; font-size:12px" border="1" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="vertical-align: center;">秒杀名
+        </td>
+        <td style="vertical-align: center;">开始时间
+        </td>
+        <td style="vertical-align: center;">中奖人数
+        </td>
+        <td style="vertical-align: center;">
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align: center;"><input name="rush_name" size="7">
+        </td>
+        <td style="vertical-align: center;">
+        <select name="year">
+        {% for year in year_list %}
+        <option value="{{ year }}" {% ifequal year now.0 %}selected="selected"{% endifequal %}>{{ year }}</option>
+        {% endfor %}
+        </select>年
+	<select name="month">
+        <option value="1" {% ifequal "01" now.1 %}selected="selected"{% endifequal %}>01</option>
+	<option value="2" {% ifequal "02" now.1 %}selected="selected"{% endifequal %}>02</option>
+	<option value="3" {% ifequal "03" now.1 %}selected="selected"{% endifequal %}>03</option>
+	<option value="4" {% ifequal "04" now.1 %}selected="selected"{% endifequal %}>04</option>
+	<option value="5" {% ifequal "05" now.1 %}selected="selected"{% endifequal %}>05</option>
+	<option value="6" {% ifequal "06" now.1 %}selected="selected"{% endifequal %}>06</option>
+	<option value="7" {% ifequal "07" now.1 %}selected="selected"{% endifequal %}>07</option>
+	<option value="8" {% ifequal "08" now.1 %}selected="selected"{% endifequal %}>08</option>
+	<option value="9" {% ifequal "09" now.1 %}selected="selected"{% endifequal %}>09</option>
+	<option value="10" {% ifequal "10" now.1 %}selected="selected"{% endifequal %}>10</option>
+	<option value="11" {% ifequal "11" now.1 %}selected="selected"{% endifequal %}>11</option>
+	<option value="12" {% ifequal "12" now.1 %}selected="selected"{% endifequal %}>12</option>
+        </select>月
+	<select name="day">
+        <option value="1" {% ifequal "01" now.2 %}selected="selected"{% endifequal %}>01</option>
+	<option value="2" {% ifequal "02" now.2 %}selected="selected"{% endifequal %}>02</option>
+	<option value="3" {% ifequal "03" now.2 %}selected="selected"{% endifequal %}>03</option>
+	<option value="4" {% ifequal "04" now.2 %}selected="selected"{% endifequal %}>04</option>
+	<option value="5" {% ifequal "05" now.2 %}selected="selected"{% endifequal %}>05</option>
+	<option value="6" {% ifequal "06" now.2 %}selected="selected"{% endifequal %}>06</option>
+	<option value="7" {% ifequal "07" now.2 %}selected="selected"{% endifequal %}>07</option>
+	<option value="8" {% ifequal "08" now.2 %}selected="selected"{% endifequal %}>08</option>
+	<option value="9" {% ifequal "09" now.2 %}selected="selected"{% endifequal %}>09</option>
+	<option value="10" {% ifequal "10" now.2 %}selected="selected"{% endifequal %}>10</option>
+	<option value="11" {% ifequal "11" now.2 %}selected="selected"{% endifequal %}>11</option>
+	<option value="12" {% ifequal "12" now.2 %}selected="selected"{% endifequal %}>12</option>
+	<option value="13" {% ifequal "13" now.2 %}selected="selected"{% endifequal %}>13</option>
+	<option value="14" {% ifequal "14" now.2 %}selected="selected"{% endifequal %}>14</option>
+	<option value="15" {% ifequal "15" now.2 %}selected="selected"{% endifequal %}>15</option>
+	<option value="16" {% ifequal "16" now.2 %}selected="selected"{% endifequal %}>16</option>
+	<option value="17" {% ifequal "17" now.2 %}selected="selected"{% endifequal %}>17</option>
+	<option value="18" {% ifequal "18" now.2 %}selected="selected"{% endifequal %}>18</option>
+	<option value="19" {% ifequal "19" now.2 %}selected="selected"{% endifequal %}>19</option>
+	<option value="20" {% ifequal "20" now.2 %}selected="selected"{% endifequal %}>20</option>
+	<option value="21" {% ifequal "21" now.2 %}selected="selected"{% endifequal %}>21</option>
+	<option value="22" {% ifequal "22" now.2 %}selected="selected"{% endifequal %}>22</option>
+	<option value="23" {% ifequal "23" now.2 %}selected="selected"{% endifequal %}>23</option>
+	<option value="24" {% ifequal "24" now.2 %}selected="selected"{% endifequal %}>24</option>
+	<option value="25" {% ifequal "25" now.2 %}selected="selected"{% endifequal %}>25</option>
+	<option value="26" {% ifequal "26" now.2 %}selected="selected"{% endifequal %}>26</option>
+	<option value="27" {% ifequal "27" now.2 %}selected="selected"{% endifequal %}>27</option>
+	<option value="28" {% ifequal "28" now.2 %}selected="selected"{% endifequal %}>28</option>
+	<option value="29" {% ifequal "29" now.2 %}selected="selected"{% endifequal %}>29</option>
+	<option value="30" {% ifequal "30" now.2 %}selected="selected"{% endifequal %}>30</option>
+	<option value="31" {% ifequal "31" now.2 %}selected="selected"{% endifequal %}>31</option>
+        </select>日
+	<select name="hour">
+        <option value="0" >00</option>
+	<option value="1" >01</option>
+	<option value="2" >02</option>
+	<option value="3" >03</option>
+	<option value="4" >04</option>
+	<option value="5" >05</option>
+	<option value="6" >06</option>
+	<option value="7" >07</option>
+	<option value="8" >08</option>
+	<option value="9" >09</option>
+	<option value="10" >10</option>
+	<option value="11" >11</option>
+	<option value="12" >12</option>
+	<option value="13" >13</option>
+	<option value="14" >14</option>
+	<option value="15" >15</option>
+	<option value="16" >16</option>
+	<option value="17" >17</option>
+	<option value="18" >18</option>
+	<option value="19" >19</option>
+	<option value="20" >20</option>
+	<option value="21" >21</option>
+	<option value="22" >22</option>
+	<option value="23" >23</option>
+        </select>时
+	<select name="min">
+        <option value="0" >00</option>
+	<option value="1" >01</option>
+	<option value="2" >02</option>
+	<option value="3" >03</option>
+	<option value="4" >04</option>
+	<option value="5" >05</option>
+	<option value="6" >06</option>
+	<option value="7" >07</option>
+	<option value="8" >08</option>
+	<option value="9" >09</option>
+	<option value="10" >10</option>
+	<option value="11" >11</option>
+	<option value="12" >12</option>
+	<option value="13" >13</option>
+	<option value="14" >14</option>
+	<option value="15" >15</option>
+	<option value="16" >16</option>
+	<option value="17" >17</option>
+	<option value="18" >18</option>
+	<option value="19" >19</option>
+	<option value="20" >20</option>
+	<option value="21" >21</option>
+	<option value="22" >22</option>
+	<option value="23" >23</option>
+	<option value="24" >24</option>
+	<option value="25" >25</option>
+	<option value="26" >26</option>
+	<option value="27" >27</option>
+	<option value="28" >28</option>
+	<option value="29" >29</option>
+	<option value="30" >30</option>
+	<option value="31" >31</option>
+	<option value="32" >32</option>
+	<option value="33" >33</option>
+	<option value="34" >34</option>
+	<option value="35" >35</option>
+	<option value="36" >36</option>
+	<option value="37" >37</option>
+	<option value="38" >38</option>
+	<option value="39" >39</option>
+	<option value="40" >40</option>
+	<option value="41" >41</option>
+	<option value="42" >42</option>
+	<option value="43" >43</option>
+	<option value="44" >44</option>
+	<option value="45" >45</option>
+	<option value="46" >46</option>
+	<option value="47" >47</option>
+	<option value="48" >48</option>
+	<option value="49" >49</option>
+	<option value="50" >50</option>
+	<option value="51" >51</option>
+	<option value="52" >52</option>
+	<option value="53" >53</option>
+	<option value="54" >54</option>
+	<option value="55" >55</option>
+	<option value="56" >56</option>
+	<option value="57" >57</option>
+	<option value="58" >58</option>
+	<option value="59" >59</option>
+        </select>分
+	<select name="sec">
+        <option value="0" >00</option>
+	<option value="1" >01</option>
+	<option value="2" >02</option>
+	<option value="3" >03</option>
+	<option value="4" >04</option>
+	<option value="5" >05</option>
+	<option value="6" >06</option>
+	<option value="7" >07</option>
+	<option value="8" >08</option>
+	<option value="9" >09</option>
+	<option value="10" >10</option>
+	<option value="11" >11</option>
+	<option value="12" >12</option>
+	<option value="13" >13</option>
+	<option value="14" >14</option>
+	<option value="15" >15</option>
+	<option value="16" >16</option>
+	<option value="17" >17</option>
+	<option value="18" >18</option>
+	<option value="19" >19</option>
+	<option value="20" >20</option>
+	<option value="21" >21</option>
+	<option value="22" >22</option>
+	<option value="23" >23</option>
+	<option value="24" >24</option>
+	<option value="25" >25</option>
+	<option value="26" >26</option>
+	<option value="27" >27</option>
+	<option value="28" >28</option>
+	<option value="29" >29</option>
+	<option value="30" >30</option>
+	<option value="31" >31</option>
+	<option value="32" >32</option>
+	<option value="33" >33</option>
+	<option value="34" >34</option>
+	<option value="35" >35</option>
+	<option value="36" >36</option>
+	<option value="37" >37</option>
+	<option value="38" >38</option>
+	<option value="39" >39</option>
+	<option value="40" >40</option>
+	<option value="41" >41</option>
+	<option value="42" >42</option>
+	<option value="43" >43</option>
+	<option value="44" >44</option>
+	<option value="45" >45</option>
+	<option value="46" >46</option>
+	<option value="47" >47</option>
+	<option value="48" >48</option>
+	<option value="49" >49</option>
+	<option value="50" >50</option>
+	<option value="51" >51</option>
+	<option value="52" >52</option>
+	<option value="53" >53</option>
+	<option value="54" >54</option>
+	<option value="55" >55</option>
+	<option value="56" >56</option>
+	<option value="57" >57</option>
+	<option value="58" >58</option>
+	<option value="59" >59</option>
+        </select>秒
+        </td>
+        <td style="vertical-align: center;"><input name="rush_count">
+        </td>
+        <td style="vertical-align: center;"><input name="sub" value="Add" type="submit" onclick='return checkinput("确定添加秒杀？");'>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+</form>
+<br>
+
+<form method="post" action="." name="add">{% csrf_token %}
+<table style="text-align: left; width: 100%; font-size:12px" border="1" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+      <td style="vertical-align: center;">
+      快速添加
+      </td>
+      <td style="vertical-align: center;">
+      <input id="rush_start_time" name="rush_start_time">秒后开始
+      </td>
+      <td style="vertical-align: center;">
+      <input id="rush_count" name="rush_count">人中奖
+      </td>
+      <td style="vertical-align: center;">
+      <input name="sub" value="QuickStart" type="submit" onclick='return check_quick_input();'>
+      </td>
+      </tr>
+    </tbody>
+</table>
+</form>
+<br>
+
+  
+  <table id="rush_table" style="text-align: left; width: 100%; font-size:12px" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: center;">秒杀轮<br>
+      </td>
+      <td style="vertical-align: center;">开始时间</td>
+      <td style="vertical-align: center;">中奖人数</td>
+      <td style="vertical-align: center;">是否结束</td>
+      <td style="vertical-align: center;"><br>
+      </td>
+    </tr>
+    {% for rush in rush_list%}
+    <form method="post" action=".">{% csrf_token %}
+    <tr>
+        <td style="vertical-align: center;">
+        {{ rush.rush_name }}
+        <input name="rush_id" value="{{ rush.id }}" type="hidden"></td>
+        <td style="vertical-align: center;">
+        {{ rush.started_at|date:"Y-m-j H:i:s" }}
+        </td>
+	<td style="vertical-align: center;">
+        {{ rush.rush_count }}
+        </td>
+	<td style="vertical-align: center;">
+	{% if rush.is_finish == 0 %}
+        否
+	{% else %}
+	是
+	{% endif %}
+        </td>
+        <td style="vertical-align: center;">
+        <input name="sub" value="Finish" onclick='return checkinput("确定关闭该次秒杀？");' type="submit">
+	<input name="sub" value="Delete" onclick='return checkinput("确定删除该次秒杀？");' type="submit">
+        </td>
+    </tr>
+    </form>
+    {% endfor %}
+    
+    </tbody>
+</table>
+
+</body></html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html><head>
+
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <meta name=”viewport” content=”width=device-width, initial-scale=1″ />
+  <title>快速秒杀</title></head><body style="background:#F5F5F5;" font="normal 100% Helvetica, Arial, sans-serif;">
+ 
+<script language="JavaScript">
+    function checkinput() 
+    { 
+        if(!check_puzzle())
+        {
+            return false;
+        }
+        if(!check_phone())
+        {
+            return false;
+        }
+        return true;
+  
+    }
+    
+    function check_puzzle() 
+    { 
+        var check = document.getElementById("check_result");
+        var result = document.getElementById("result");
+        if (result.value == check.value)
+        {
+            return true;
+        }
+        else
+        {
+            window.alert("你数学是体育老师教的吗，亲！");
+            return false;
+        }
+  
+    }
+    
+    function check_phone() 
+    { 
+        var check = document.getElementById("phone");
+        if (check.value && !isNaN(check.value) && check.value.length == 11)
+        {
+            return true;
+        }
+        else
+        {
+            window.alert("请输入正确的手机号码");
+            return false;
+        }
+  
+    }
+    
+</script>
+
+<br><br>
+
+<form method="post" action="." name="go">{% csrf_token %}
+  <input id="check_result" value="{{ reuslt }}" type="hidden">
+  <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="vertical-align: center; font-size: 4em; width: 50%">{{ puzzle }}
+        </td>
+        <td style="vertical-align: center;"><input style="width:100%;height:100%;" name="result" id="result">
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align: center; font-size: 4em;">手机号码
+        </td>
+        <td style="vertical-align: center;"><input style="width:100%;height:100%;" name="phone" id="phone">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <input name="sub" value="秒杀" onclick='return checkinput();' type="submit">
+  <br>
+</form>
+
+</body></html>

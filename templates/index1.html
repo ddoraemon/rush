@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>倒计时</title>
+<link href="/static/css/page.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+        {% if err %}
+        window.alert("{{ err }}");
+	{% endif %}
+	{% if rush_number %}
+        var rush = document.getElementById("rush");
+	//rush.style.visibility="{{ rush_button }}";
+	countDown("{{ start_at }}","#colockbox1");
+	{% endif %}
+});
+
+function countDown(time,id){
+	var day_elem = $(id).find('.day');
+	var hour_elem = $(id).find('.hour');
+	var minute_elem = $(id).find('.minute');
+	var second_elem = $(id).find('.second');
+	var rush = document.getElementById("rush");
+	
+	//if(typeof end_time == "string")
+	//var end_time = new Date(time).getTime(),//月份是实际月份-1
+	//sys_second = (end_time-new Date().getTime())/1000;
+	sys_second = {{ total_sec }}
+	var timer = setInterval(function(){
+		if (sys_second > 1) {
+        //rush.style.visibility="hidden";
+			sys_second -= 1;
+			var day = Math.floor((sys_second / 3600) / 24);
+			var hour = Math.floor((sys_second / 3600) % 24);
+			var minute = Math.floor((sys_second / 60) % 60);
+			var second = Math.floor(sys_second % 60);
+			day_elem && $(day_elem).text(day);//计算天
+			$(hour_elem).text(hour<10?"0"+hour:hour);//计算小时
+			$(minute_elem).text(minute<10?"0"+minute:minute);//计算分钟
+			$(second_elem).text(second<10?"0"+second:second);//计算秒杀
+			//console.log(second_elem.html());
+		} else { 
+		        $(day_elem).text("0");//计算天
+			$(hour_elem).text("00");//计算小时
+			$(minute_elem).text("00");//计算分钟
+			$(second_elem).text("00");//计算秒杀
+			rush.style.visibility="visible";
+			clearInterval(timer);
+			
+			console.log(second_elem.html());
+		}
+	}, 1000);
+}
+</script>
+</head>
+<body>
+{% if rush_number %}
+<div class="colockbox" id="colockbox1"> <span class="day">{{ dis_day }}</span> <span class="hour">{{ dis_hour }}</span> <span class="minute">{{ dis_min }}</span> <span class="second">{{ dis_sec }}</span> </div>
+<form method="post" action=".">{% csrf_token %}
+<input name="rushid" id="rushid" value="{{ rush.id }}" type="hidden">
+<input name="rush" id="rush" value="开始秒杀" type="submit">
+</form>
+{% else %}
+当前没有秒杀
+{% endif %}
+</body>
+</html>

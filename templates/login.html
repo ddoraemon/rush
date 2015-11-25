@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
+    <title>登录</title>
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        {% if err %}
+        window.alert("{{ err }}");
+        {% endif %}
+        
+    });
+    </script>
+    </head>
+    
+    <body style="background:#F5F5F5;">
+    <br><br>
+
+        <form method="post" action="." name="go">{% csrf_token %}
+            <table style="text-align: left; width: 100%; font-size:12px" border="0" cellpadding="2" cellspacing="2">
+                <tbody>
+                    <tr>
+                        <td style="vertical-align: top;">username
+                        </td>
+                        <td style="vertical-align: top;">
+                            <input name="username" size="7" id="username" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: top;">password
+                        </td>
+                        <td style="vertical-align: top;">
+                            <input name="password" size="7" id="password" type="password">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <input name="sub" value="login" type="submit">
+            <br>
+        </form>
+
+    </body>
+</html>
