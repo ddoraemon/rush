@@ -1,11 +1,47 @@
 <!DOCTYPE html>
-<html><head>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name='aplus-terminal' content='1'>
+<meta name="aplus-touch" content="1"/>
+<title>快抢啊</title>
+<link rel="stylesheet" type="text/css" href="/static/css/amazeui.min.css">
 
-  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
-  <meta name=”viewport” content=”width=device-width, initial-scale=1″ />
-  <title>快速秒杀</title></head><body style="background:#F5F5F5;" font="normal 100% Helvetica, Arial, sans-serif;">
- 
-<script language="JavaScript">
+<style type="text/css">
+
+#wrapper{
+  padding: 10px;
+  margin-top: 50px;
+}
+
+#ms{
+  margin-top: 50px;
+  width: 100%;
+}
+
+</style>
+
+
+<div id="wrapper">
+   <form method="post" action="." name="go" class="am-form">{% csrf_token %}
+        <input id="check_result" value="{{ reuslt }}" type="hidden">
+        <label for="result">请听题 {{ puzzle }}</label>
+        <input name="result" size="7" id="result" type="text" placeholder="答对了才有礼噢">
+        <br>
+        <label for="result">请输入手机号码</label>
+        <input name="phone" id="phone" type="text" placeholder="不要乱输噢">
+        <input name="sub" value="快抢啊！" class="am-btn am-btn-secondary am-radius" onclick='return checkinput();' id="ms" type="submit">
+  </form>
+</div>
+
+
+
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript">
     function checkinput() 
     { 
         if(!check_puzzle())
@@ -30,7 +66,7 @@
         }
         else
         {
-            window.alert("你数学是体育老师教的吗，亲！");
+            window.alert("你数学是体育老师教的吗，亲 ^_^");
             return false;
         }
   
@@ -52,29 +88,5 @@
     }
     
 </script>
-
-<br><br>
-
-<form method="post" action="." name="go">{% csrf_token %}
-  <input id="check_result" value="{{ reuslt }}" type="hidden">
-  <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
-    <tbody>
-      <tr>
-        <td style="vertical-align: center; font-size: 4em; width: 50%">{{ puzzle }}
-        </td>
-        <td style="vertical-align: center;"><input style="width:100%;height:100%;" name="result" id="result">
-        </td>
-      </tr>
-      <tr>
-        <td style="vertical-align: center; font-size: 4em;">手机号码
-        </td>
-        <td style="vertical-align: center;"><input style="width:100%;height:100%;" name="phone" id="phone">
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <input name="sub" value="秒杀" onclick='return checkinput();' type="submit">
-  <br>
-</form>
-
-</body></html>
+</body>
+</html>

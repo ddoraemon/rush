@@ -18,7 +18,7 @@ $(function(){
 	{% endif %}
 	{% if rush_number %}
         var rush = document.getElementById("rush");
-	rush.style.visibility="{{ rush_button }}";
+	//rush.style.visibility="{{ rush_button }}";
 	countDown("{{ start_at }}","#clockbox");
 	{% endif %}
 });
@@ -36,7 +36,7 @@ function countDown(time,id){
 	sys_second = {{ total_sec }}
 	var timer = setInterval(function(){
 		if (sys_second > 1) {
-        rush.style.visibility="hidden";
+        //rush.style.visibility="hidden";
 			sys_second -= 1;
 			var day = Math.floor((sys_second / 3600) / 24);
 			var hour = Math.floor((sys_second / 3600) % 24);
